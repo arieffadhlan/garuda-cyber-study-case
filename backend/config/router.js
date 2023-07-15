@@ -4,4 +4,7 @@ const middlewares = require("../app/middlewares");
 
 const router = express.Router();
 
+// Auth
+router.post("/api/v1/register", controllers.authController.register);
+
 module.exports = router;
