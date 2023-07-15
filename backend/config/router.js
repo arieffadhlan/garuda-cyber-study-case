@@ -11,4 +11,8 @@ router.post("/api/v1/login", controllers.authController.login);
 router.post("/api/v1/forgot-password", controllers.authController.forgotPassword);
 router.post("/api/v1/reset-password/:token", controllers.authController.resetPassword);
 
+// User
+router.get("/api/v1/user", middlewares.authorize, controllers.userController.getUsers);
+router.get("/api/v1/user/:id", middlewares.authorize, controllers.userController.getUser);
+
 module.exports = router;
