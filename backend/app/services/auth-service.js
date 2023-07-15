@@ -1,5 +1,6 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const { v4: uuidv4 } = require("uuid");
 const userRepository = require("../repositories/user-repository");
 const ApplicationError = require("../errors/ApplicationError");
 const { JWT_SIGNATURE_KEY } = require("../../config/application");
@@ -51,23 +52,6 @@ const register = async (req) => {
       address,
       password: encryptedPassword,
     });
-  
-    // Send otp to email
-    await mailService.sendMail(email, "Verifikasi Akun",
-      `
-        <div style="font-size: 14px;">
-          <span>Halo ${name},</span> <br /><br />
-          <span>
-            Terima kasih telah mendaftar. 
-            Sebelum lanjut, Anda harus melakukan verifikasi akun terlebih dahulu. Untuk menyelesaikan tahap registrasi, silakan klik link verifikasi akun dibawah ini:
-          </span>
-          <br /><br />
-          <a href="http://localhost:8000/auth/verify/${user.token}" style="color: #222">Verifikasi Akun</a> <br /><br />
-          <span>Jika Anda tidak membuat akun, maka Anda tidak perlu melakukan apapun dan silakan abaikan email ini.</span> <br /><br />
-          <span>Terima kasih.</span>
-        </div>
-      `
-    );
   
     return user; 
   } catch (error) {
@@ -155,20 +139,6 @@ const forgotPassword = async (req) => {
     if (!user) {
       throw new ApplicationError(404, "Alamat email tidak ditemukan.");
     }
-  
-    // Send password reset link to email
-    return await mailService.sendMail(email, "Reset Password",
-      `
-        <div style="font-size: 14px;">
-          <span>Hai ${user.name},</span> <br /> <br />
-          <span>Anda menerima email ini karena kami menerima permintan untuk mengatur ulang password akun Anda. Silakan klik link di bawah untuk mengatur ulang password Anda.</span> <br /> <br />
-          <a href="https://shinzou-app.vercel.app/auth/reset-password/${user.token}" style="color: #222">Reset Password</a> <br /> <br />
-          <span>Jika Anda tidak meminta pengaturan ulang password, maka Anda tidak perlu melakukan apapun dan silakan abaikan email ini.</span> <br /> <br />
-          <span>Terima kasih,</span> <br />
-          <span>Tim Shinzou</span>
-        </div>
-      `
-    );
   } catch (error) {
     if (error instanceof ApplicationError) {
       throw new ApplicationError(error.statusCode, error.message);

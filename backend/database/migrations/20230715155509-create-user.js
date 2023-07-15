@@ -34,10 +34,12 @@ module.exports = {
       },
       is_verified: {
         allowNull: false,
+        defaultValue: false,
         type: Sequelize.BOOLEAN
       },
       role: {
         allowNull: false,
+        defaultValue: "User",
         type: Sequelize.STRING
       },
       token: {
