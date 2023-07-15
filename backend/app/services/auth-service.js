@@ -79,6 +79,29 @@ const register = async (req) => {
   }
 }
 
+const verifyAccount = async (req) => {
+  try {
+    const { token } = req.params;
+    
+    const user = await userRepository.getUserByToken(token);
+    if (!user) {
+      throw new ApplicationError(401, "Terjadi kesalahan, silakan coba lagi.");
+    }
+  
+    const newToken = generateUUIDToken();
+    return await userRepository.updateUser(user.id, {
+      is_verified: true,
+      token: newToken
+    });
+  } catch (error) {
+    if (error instanceof ApplicationError) {
+      throw new ApplicationError(error.statusCode, error.message);
+    } else {
+      throw new Error(error.message);
+    }
+  }
+}
+
 const login = async (req) => {
   try {
     const { email, password } = req.body;
@@ -185,6 +208,7 @@ const resetPassword = async (req) => {
 
 module.exports = {
   register,
+  verifyAccount,
   login,
   forgotPassword,
   resetPassword
