@@ -16,6 +16,10 @@ const createToken = (payload) => {
   return jwt.sign(payload, JWT_SIGNATURE_KEY, { expiresIn: "24h" });
 }
 
+const generateUUIDToken = () => {
+  return uuidv4();
+}
+
 const checkRequiredData = (data) => {
   Object.values(data).every((value) => {
     if (value === null || value === "") {
@@ -151,8 +155,37 @@ const forgotPassword = async (req) => {
   }
 }
 
+const resetPassword = async (req) => {
+  try {
+    const { token } = req.params;
+    const { password } = req.body;
+    if (!password) {
+      throw new ApplicationError(422, "Password wajib diisi.");
+    }
+    
+    const user = await userRepository.getUserByToken(token);
+    if (!user) {
+      throw new ApplicationError(401, "Terjadi kesalahan, silakan coba lagi.");
+    }
+  
+    const newPassword = encryptPassword(password);
+    const newToken = generateUUIDToken();
+    return await userRepository.updateUser(user.id, {
+      password: newPassword,
+      token: newToken
+    });
+  } catch (error) {
+    if (error instanceof ApplicationError) {
+      throw new ApplicationError(error.statusCode, error.message);
+    } else {
+      throw new Error(error.message);
+    }
+  }
+}
+
 module.exports = {
   register,
   login,
-  forgotPassword
+  forgotPassword,
+  resetPassword
 }

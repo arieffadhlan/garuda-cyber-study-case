@@ -58,8 +58,25 @@ const forgotPassword = async (req, res) => {
   }
 }
 
+const resetPassword = async (req, res) => {
+  try {
+    await authService.resetPassword(req);
+    
+    res.status(200).json({
+      status: "Success",
+      message: "Reset password telah berhasil."
+    });
+  } catch (error) {
+    res.status(error.statusCode || 400).json({
+      status: "Error",
+      message: error.message
+    });
+  }
+}
+
 module.exports = {
   register,
   login,
-  forgotPassword
+  forgotPassword,
+  resetPassword
 }
