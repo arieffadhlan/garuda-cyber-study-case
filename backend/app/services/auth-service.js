@@ -117,7 +117,42 @@ const login = async (req) => {
   }
 }
 
+const forgotPassword = async (req) => {
+  try {
+    const { email } = req.body;
+    if (!email) {
+      throw new ApplicationError(422, "Email wajib diisi.");
+    }
+  
+    const user = await userRepository.getUserByEmail(email);
+    if (!user) {
+      throw new ApplicationError(404, "Alamat email tidak ditemukan.");
+    }
+  
+    // Send password reset link to email
+    return await mailService.sendMail(email, "Reset Password",
+      `
+        <div style="font-size: 14px;">
+          <span>Hai ${user.name},</span> <br /> <br />
+          <span>Anda menerima email ini karena kami menerima permintan untuk mengatur ulang password akun Anda. Silakan klik link di bawah untuk mengatur ulang password Anda.</span> <br /> <br />
+          <a href="https://shinzou-app.vercel.app/auth/reset-password/${user.token}" style="color: #222">Reset Password</a> <br /> <br />
+          <span>Jika Anda tidak meminta pengaturan ulang password, maka Anda tidak perlu melakukan apapun dan silakan abaikan email ini.</span> <br /> <br />
+          <span>Terima kasih,</span> <br />
+          <span>Tim Shinzou</span>
+        </div>
+      `
+    );
+  } catch (error) {
+    if (error instanceof ApplicationError) {
+      throw new ApplicationError(error.statusCode, error.message);
+    } else {
+      throw new Error(error.message);
+    }
+  }
+}
+
 module.exports = {
   register,
-  login
+  login,
+  forgotPassword
 }

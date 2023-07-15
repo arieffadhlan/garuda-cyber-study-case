@@ -42,7 +42,24 @@ const login = async (req, res) => {
   }
 }
 
+const forgotPassword = async (req, res) => {
+  try {
+    await authService.forgotPassword(req);
+    
+    res.status(200).json({
+      status: "Success",
+      message: "Tautan reset password berhasil terkirim."
+    });
+  } catch (error) {
+    res.status(error.statusCode || 400).json({
+      status: "Error",
+      message: error.message
+    });
+  }
+}
+
 module.exports = {
   register,
-  login
+  login,
+  forgotPassword
 }
