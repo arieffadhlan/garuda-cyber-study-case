@@ -69,9 +69,23 @@ const updateProduct = async (req) => {
   }
 }
 
+const deleteProduct = async (id) => {
+  try {
+    const product = await getProduct(id);
+    return await productRepository.deleteProduct(product.id);
+  } catch (error) {
+    if (error instanceof ApplicationError) {
+      throw new ApplicationError(error.statusCode, error.message);
+    } else {
+      throw new Error(error.message);
+    }
+  }
+}
+
 module.exports = {
   getProducts,
   getProduct,
   addProduct,
-  updateProduct
+  updateProduct,
+  deleteProduct
 }

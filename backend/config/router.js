@@ -20,5 +20,6 @@ router.get("/api/v1/product", controllers.productController.getProducts);
 router.get("/api/v1/product/:id", controllers.productController.getProduct);
 router.post("/api/v1/product", middlewares.authorize, controllers.productController.addProduct);
 router.put("/api/v1/product/:id", middlewares.authorize, controllers.productController.updateProduct);
+router.delete("/api/v1/product/:id", middlewares.authorize, controllers.productController.deleteProduct);
 
 module.exports = router;

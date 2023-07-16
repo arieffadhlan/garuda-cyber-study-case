@@ -1,4 +1,4 @@
-export const checkRequiredData = (data) => {
+const checkRequiredData = (data) => {
   Object.values(data).every((value) => {
     if (value === null || value === "") {
       return true;
@@ -6,4 +6,8 @@ export const checkRequiredData = (data) => {
     
     return false;
   });
+}
+
+module.exports = {
+  checkRequiredData
 }

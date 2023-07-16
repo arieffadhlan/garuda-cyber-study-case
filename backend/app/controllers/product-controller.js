@@ -66,9 +66,27 @@ const updateProduct = async (req, res) => {
   }
 }
 
+const deleteProduct = async (req, res) => {
+  try {
+    const { id } = req.params;
+    await productService.deleteProduct(id);
+
+    res.status(200).json({
+      status: "Success",
+      message: "Data produk telah berhasil dihapus.",
+    });
+  } catch (error) {
+    res.status(error.statusCode || 400).json({
+      status: "Error",
+      message: error.message
+    });
+  }
+}
+
 module.exports = {
   getProducts,
   getProduct,
   addProduct,
-  updateProduct
+  updateProduct,
+  deleteProduct
 }
