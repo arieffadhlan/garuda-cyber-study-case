@@ -25,5 +25,6 @@ router.delete("/api/v1/product/:id", middlewares.authorize, controllers.productC
 // Cart
 router.get("/api/v1/cart/:userId", controllers.cartController.getCartByUser);
 router.post("/api/v1/cart", controllers.cartController.addToCart);
+router.delete("/api/v1/cart/:id", controllers.cartController.removeFromCart);
 
 module.exports = router;

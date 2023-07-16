@@ -20,6 +20,23 @@ const getCartByUser = async (req) => {
   }
 }
 
+const getCart = async (id) => {
+  try {
+    const cart = await cartRepository.getCart(id);
+    if (!cart) {
+      throw new ApplicationError(404, "Data keranjang tidak ditemukan.");
+    } 
+    
+    return cart;
+  } catch (error) {
+    if (error instanceof ApplicationError) {
+      throw new ApplicationError(error.statusCode, error.message);
+    } else {
+      throw new Error(error.message);
+    }
+  }
+}
+
 const addToCart = async (req) => {
   try {
     const { productId, quantity } = req.body;
@@ -41,7 +58,21 @@ const addToCart = async (req) => {
   }
 }
 
+const removeFromCart = async (id) => {
+  try {
+    const cart = await getCart(id);
+    return await cartRepository.removeFromCart(cart.id);
+  } catch (error) {
+    if (error instanceof ApplicationError) {
+      throw new ApplicationError(error.statusCode, error.message);
+    } else {
+      throw new Error(error.message);
+    }
+  }
+}
+
 module.exports = {
   getCartByUser,
-  addToCart
+  addToCart,
+  removeFromCart
 }

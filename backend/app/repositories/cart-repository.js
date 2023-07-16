@@ -18,16 +18,33 @@ const getCartByUser = (userId) => {
   });
 }
 
+const getCart = (id) => {
+  return Cart.findOne({
+    where: { id },
+    include: [
+      {
+        model: User,
+        as: "user"
+      },
+      {
+        model: Product,
+        as: "product"
+      }
+    ]
+  });
+}
+
 const addToCart = (data) => {
   return Cart.create(data);
 }
 
-const deleteCart = (id) => {
+const removeFromCart = (id) => {
   return Cart.destroy({ where: { id } });
 }
 
 module.exports = {
   getCartByUser,
+  getCart,
   addToCart,
-  deleteCart
+  removeFromCart
 }

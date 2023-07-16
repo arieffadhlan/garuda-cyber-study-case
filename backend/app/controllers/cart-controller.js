@@ -33,7 +33,25 @@ const addToCart = async (req, res) => {
   }
 }
 
+const removeFromCart = async (req, res) => {
+  try {
+    const { id } = req.params;
+    await cartService.removeFromCart(id);
+
+    res.status(200).json({
+      status: "Success",
+      message: "Data keranjang telah berhasil dihapus.",
+    });
+  } catch (error) {
+    res.status(error.statusCode || 400).json({
+      status: "Error",
+      message: error.message
+    });
+  }
+}
+
 module.exports = {
   getCartByUser,
-  addToCart
+  addToCart,
+  removeFromCart
 }
