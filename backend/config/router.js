@@ -18,5 +18,6 @@ router.get("/api/v1/user/:id", middlewares.authorize, controllers.userController
 // Product
 router.get("/api/v1/product", controllers.productController.getProducts);
 router.get("/api/v1/product/:id", controllers.productController.getProduct);
+router.post("/api/v1/product", middlewares.authorize, controllers.productController.addProduct);
 
 module.exports = router;

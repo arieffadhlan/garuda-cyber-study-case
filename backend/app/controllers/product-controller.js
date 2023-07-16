@@ -33,7 +33,25 @@ const getProduct = async (req, res) => {
   }
 }
 
+const addProduct = async (req, res) => {
+  try {
+    const product = await productService.addProduct(req);
+
+    res.status(201).json({
+      status: "Success",
+      message: "Data produk telah berhasil ditambahkan.",
+      data: product
+    });
+  } catch (error) {
+    res.status(error.statusCode || 400).json({
+      status: "Error",
+      message: error.message
+    });
+  }
+}
+
 module.exports = {
   getProducts,
-  getProduct
+  getProduct,
+  addProduct
 }

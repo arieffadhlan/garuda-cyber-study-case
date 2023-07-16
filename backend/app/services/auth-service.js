@@ -4,6 +4,7 @@ const { v4: uuidv4 } = require("uuid");
 const userRepository = require("../repositories/user-repository");
 const ApplicationError = require("../errors/ApplicationError");
 const { JWT_SIGNATURE_KEY } = require("../../config/application");
+const { checkRequiredData } = require("../../utils/checkRequiredData");
 
 const encryptPassword = (password) => {
   return bcrypt.hashSync(password, 10);
@@ -19,16 +20,6 @@ const createToken = (payload) => {
 
 const generateUUIDToken = () => {
   return uuidv4();
-}
-
-const checkRequiredData = (data) => {
-  Object.values(data).every((value) => {
-    if (value === null || value === "") {
-      return true;
-    }
-    
-    return false;
-  });
 }
 
 const register = async (req) => {

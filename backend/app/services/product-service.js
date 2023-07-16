@@ -1,5 +1,6 @@
 const productRepository = require("../repositories/product-repository");
 const ApplicationError = require("../errors/ApplicationError");
+const { checkRequiredData } = require("../../utils/checkRequiredData");
 
 const getProducts = async () => {
   try {
@@ -31,7 +32,26 @@ const getProduct = async (id) => {
   }
 }
 
+const addProduct = async (req) => {
+  try {
+    if (checkRequiredData(req.body)) {
+      throw new ApplicationError(422, "Semua data wajib diisi.");
+    }
+
+    const product = await productRepository.addProduct(req.body);
+    
+    return product;
+  } catch (error) {
+    if (error instanceof ApplicationError) {
+      throw new ApplicationError(error.statusCode, error.message);
+    } else {
+      throw new Error(error.message);
+    }
+  }
+}
+
 module.exports = {
   getProducts,
-  getProduct
+  getProduct,
+  addProduct
 }
