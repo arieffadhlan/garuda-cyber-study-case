@@ -20,6 +20,28 @@ const getCartByUser = async (req) => {
   }
 }
 
+const addToCart = async (req) => {
+  try {
+    const { productId, quantity } = req.body;
+    const { id } = req.user;
+
+    const cart = await cartRepository.addToCart({
+      user_id: id,
+      product_id: productId,
+      quantity
+    });
+    
+    return cart;
+  } catch (error) {
+    if (error instanceof ApplicationError) {
+      throw new ApplicationError(error.statusCode, error.message);
+    } else {
+      throw new Error(error.message);
+    }
+  }
+}
+
 module.exports = {
-  getCartByUser
+  getCartByUser,
+  addToCart
 }

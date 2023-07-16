@@ -18,7 +18,7 @@ const getCartByUser = (userId) => {
   });
 }
 
-const addCart = (data) => {
+const addToCart = (data) => {
   return Cart.create(data);
 }
 
@@ -28,6 +28,6 @@ const deleteCart = (id) => {
 
 module.exports = {
   getCartByUser,
-  addCart,
+  addToCart,
   deleteCart
 }
