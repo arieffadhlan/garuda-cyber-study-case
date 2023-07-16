@@ -1,5 +1,6 @@
 "use strict";
 /** @type {import("sequelize-cli").Migration} */
+const bcrypt = require("bcryptjs");
 const { v4: uuidv4 } = require("uuid");
 module.exports = {
   async up (queryInterface, Sequelize) {
@@ -11,7 +12,7 @@ module.exports = {
         email: "admin@gmail.com",
         phone_number: "08123456789",
         address: "Jalan Medan, Kabupaten Medan Tuntungan, Kecamatan Tanjung Selamat, Kota Medan, Sumatera Utara",
-        password: "password",
+        password: bcrypt.hashSync("password", 10),
         is_verified: true,
         role: "Admin",
         token: uuidv4(),
@@ -25,7 +26,7 @@ module.exports = {
         email: "user@gmail.com",
         phone_number: "08987654321",
         address: "Jalan Medan, Kabupaten Medan Tuntungan, Kecamatan Tanjung Selamat, Kota Medan, Sumatera Utara",
-        password: "password",
+        password: bcrypt.hashSync("password", 10),
         is_verified: true,
         role: "User",
         token: uuidv4(),
