@@ -8,11 +8,17 @@ const getCartByUser = (userId) => {
     include: [
       {
         model: User,
-        as: "user"
+        as: "user",
+        attributes: {
+          exclude: ["password", "is_verified", "role", "createdAt", "updatedAt"]
+        },
       },
       {
         model: Product,
-        as: "product"
+        as: "product",
+        attributes: {
+          exclude: ["createdAt", "updatedAt"]
+        },
       }
     ]
   });

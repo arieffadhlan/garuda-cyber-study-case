@@ -3,9 +3,9 @@ const ApplicationError = require("../errors/ApplicationError");
 
 const getCartByUser = async (req) => {
   try {
-    const { userId } = req.params;
+    const { id } = req.user;
 
-    const userCart = await cartRepository.getCartByUser(userId);    
+    const userCart = await cartRepository.getCartByUser(id);    
     if (!userCart) {
       throw new ApplicationError(404, "Data keranjang tidak ditemukan.");
     } 
