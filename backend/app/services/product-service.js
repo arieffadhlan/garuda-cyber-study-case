@@ -50,8 +50,28 @@ const addProduct = async (req) => {
   }
 }
 
+const updateProduct = async (req) => {
+  try {
+    const { id } = req.params;
+
+    if (checkRequiredData(req.body)) {
+      throw new ApplicationError(422, "Semua data wajib diisi.");
+    }
+
+    const product = await getProduct(id);
+    return await productRepository.updateProduct(product.id, req.body);
+  } catch (error) {
+    if (error instanceof ApplicationError) {
+      throw new ApplicationError(error.statusCode, error.message);
+    } else {
+      throw new Error(error.message);
+    }
+  }
+}
+
 module.exports = {
   getProducts,
   getProduct,
-  addProduct
+  addProduct,
+  updateProduct
 }

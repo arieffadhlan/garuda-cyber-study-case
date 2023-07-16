@@ -50,8 +50,25 @@ const addProduct = async (req, res) => {
   }
 }
 
+const updateProduct = async (req, res) => {
+  try {
+    await productService.updateProduct(req);
+
+    res.status(200).json({
+      status: "Success",
+      message: "Data produk telah berhasil diperbarui.",
+    });
+  } catch (error) {
+    res.status(error.statusCode || 400).json({
+      status: "Error",
+      message: error.message
+    });
+  }
+}
+
 module.exports = {
   getProducts,
   getProduct,
-  addProduct
+  addProduct,
+  updateProduct
 }
