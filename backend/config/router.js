@@ -27,4 +27,7 @@ router.get("/api/v1/cart", middlewares.authorize, controllers.cartController.get
 router.post("/api/v1/cart", middlewares.authorize, controllers.cartController.addToCart);
 router.delete("/api/v1/cart/:id", middlewares.authorize, controllers.cartController.removeFromCart);
 
+// Transaction
+router.post("/api/v1/transaction", middlewares.authorize, controllers.transactionController.addTransaction);
+
 module.exports = router;
