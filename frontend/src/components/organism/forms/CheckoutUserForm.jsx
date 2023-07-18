@@ -12,19 +12,19 @@ const CheckoutUserForm = () => {
       <div className="flex flex-col gap-4 p-4">
         <div className="flex flex-col gap-1">
           <Label id="name" className="font-medium text-sm">Nama Lengkap</Label>
-          <Input type="text" variant="secondary" name="name" hookForm={false} value="Muhammad Arief Fadhlan" placeholder="Pilih title" readOnly disabled />
+          <Input type="text" name="name" hookForm={false} value="Muhammad Arief Fadhlan" placeholder="Pilih title" readOnly disabled />
         </div>
         <div className="flex flex-col gap-1">
           <Label id="email" className="font-medium text-sm">Email</Label>
-          <Input type="email" variant="secondary" name="email" hookForm={false} value="marieffadhlan@gmail.com" placeholder="contoh@gmail.com" readOnly disabled />
+          <Input type="email" name="email" hookForm={false} value="marieffadhlan@gmail.com" placeholder="contoh@gmail.com" readOnly disabled />
         </div>
         <div className="flex flex-col gap-1">
           <Label id="phone_number" className="font-medium text-sm">Nomor Telepon</Label>
-          <Input type="number" variant="secondary" name="phone_number" hookForm={false} value="08123456789" placeholder="Nomor telepon" readOnly disabled />
+          <Input type="number" name="phone_number" hookForm={false} value="08123456789" placeholder="Nomor telepon" readOnly disabled />
         </div>
         <div className="flex flex-col gap-1">
           <Label id="address" className="font-medium text-sm">Alamat</Label>
-          <Input type="number" variant="secondary" name="address" hookForm={false} value="Jalan Medan, Kecamatan Medan, Kabupaten Medan, Kota Medan, Sumatera Utara" placeholder="Alamat" readOnly disabled />
+          <Input type="number" name="address" hookForm={false} value="Jalan Medan, Kecamatan Medan, Kabupaten Medan, Kota Medan, Sumatera Utara" placeholder="Alamat" readOnly disabled />
         </div>
       </div>
     </div>

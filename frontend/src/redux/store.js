@@ -3,6 +3,7 @@ import { persistReducer, persistStore } from "redux-persist";
 import createWebStorage from "redux-persist/lib/storage/createWebStorage";
 import thunk from "redux-thunk";
 
+import authReducer from "./features/auth/authSlice";
 import offcanvasReducer from "./features/offcanvas/offcanvasSlice";
 
 const createNoopStorage = () => {
@@ -26,7 +27,8 @@ const persistConfig = {
 }
 
 const rootReducer = combineReducers({
-  offcanvas: offcanvasReducer,
+  auth: authReducer,
+  offcanvas: offcanvasReducer
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

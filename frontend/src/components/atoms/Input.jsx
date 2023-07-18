@@ -6,7 +6,6 @@ import Alert from "./Alert";
 
 const Input = ({ 
   type, 
-  variant, 
   name, 
   hookForm = true,
   className = "",
@@ -21,15 +20,8 @@ const Input = ({
     formErrors = errors;
   }
 
-  const inputVariants = {
-    primary: "py-3 rounded-2xl",  
-    secondary: "py-2.5 rounded-lg h-10"
-  };
-
-  const pickedVariant = inputVariants[variant];
   const classNames = twMerge(
     "input", 
-    pickedVariant, 
     className, 
     formErrors ? formErrors[name]?.message && "border-danger" : ""
   );
