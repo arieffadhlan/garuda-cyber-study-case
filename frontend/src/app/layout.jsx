@@ -1,8 +1,12 @@
 "use client";
 
+import { Suspense } from "react";
 import { Inter } from "next/font/google"
 import Provider from "@/redux/provider";
 import "./globals.css";
+
+import PrivateRoute from "@/components/templates/PrivateRoute";
+import Loading from "./loading";
 
 const inter = Inter({ 
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
@@ -10,6 +14,12 @@ const inter = Inter({
 });
 
 const RootLayout = ({ children }) => {
+  const protectedRoutes = [
+    "/checkout",
+    "/checkout/checkout-success",
+    "/order-history"
+  ];
+  
   return (
     <html lang="en" className={inter.className}>
       <head>
@@ -22,7 +32,11 @@ const RootLayout = ({ children }) => {
       </head>
       <body>
         <Provider>
-          {children}
+          <PrivateRoute protectedRoutes={protectedRoutes}>
+            <Suspense fallback={<Loading />}>
+              {children}
+            </Suspense>
+          </PrivateRoute>
         </Provider>
       </body>
     </html>
