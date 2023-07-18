@@ -1,6 +1,7 @@
 "use client";
 
 import { twMerge } from "tailwind-merge";
+import { ArrowPathIcon } from "@heroicons/react/24/outline"
 
 const Button = ({
   type,
@@ -19,9 +20,7 @@ const Button = ({
       {...props}
     >
       {loading ? (
-        <span className="animate-spin material-icons-round">
-          autorenew
-        </span>
+        <ArrowPathIcon className="w-4 h-4 animate-spin" />
       ): children}
     </button>
   ) : (

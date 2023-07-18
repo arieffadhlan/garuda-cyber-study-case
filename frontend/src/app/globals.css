@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --toastify-toast-min-height: 52px !important;
+  --toastify-color-success: #065f46 !important;
+  --toastify-color-error: #990000 !important;
+}
+
 * {
   box-sizing: border-box;
   scroll-behavior: smooth;
@@ -55,4 +61,21 @@
   .input {
     @apply flex items-center gap-4 w-full h-10 px-4 py-2.5 outline-none border border-[#D0D0D0] rounded-lg bg-white text-sm text-black transition duration-[0.2s] ease-[cubic-bezier(.4,0,1,1)] placeholder:text-sm placeholder:text-[#757575] focus:border-[#929292] disabled:border-[#757575] disabled:bg-gray-200 disabled:text-[#757575];
   }
+}
+
+/* React Toastify */
+.Toastify__toast-theme--light.Toastify__toast--success {
+  @apply flex justify-center items-center px-4.5 py-2.5 rounded-xl bg-[#065f46] font-medium text-sm text-center text-white;
+}
+
+.Toastify__toast-theme--light.Toastify__toast--error {
+  @apply flex justify-center items-center px-4.5 py-2.5 rounded-xl bg-[#990000] font-medium text-sm text-center text-white;
+}
+
+.Toastify__toast-auth .Toastify {
+  @apply flex justify-center items-center;
+}
+
+.Toastify__toast-auth .Toastify .Toastify__toast-container--bottom-center {
+  @apply left-auto translate-x-0;
 }
