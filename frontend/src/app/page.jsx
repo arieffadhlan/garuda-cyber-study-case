@@ -1,4 +1,5 @@
 import Navbar from '@/components/organism/Navbar'
+import CartList from '@/components/templates/CartList';
 import ProductList from '@/components/templates/ProductList';
 
 const Home = () => {
@@ -8,6 +9,7 @@ const Home = () => {
       <main>
         <section>
           <ProductList />
+          <CartList />
         </section>
       </main>
     </>
