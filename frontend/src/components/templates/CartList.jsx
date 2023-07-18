@@ -33,9 +33,9 @@ const CartList = () => {
       {/* Cart List */}
       <div className="px-5 pb-5 mt-6">
         <div className="flow-root">
-          <ul className="-my-6 divide-y divide-gray-200">
+          <div className="-my-6 divide-y divide-gray-200">
             {products.map((product) => (
-              <li key={product.id} className="flex py-6">
+              <div key={product.id} className="flex py-6">
                 <div className="overflow-hidden flex-shrink-0 w-24 h-24 rounded-md border border-gray-200">
                   <img
                     src={product.imageSrc}
@@ -55,9 +55,9 @@ const CartList = () => {
                     </button>
                   </div>
                 </div>
-              </li>
+              </div>
             ))}
-          </ul>
+          </div>
         </div>
       </div>
 
