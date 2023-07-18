@@ -7,6 +7,10 @@ module.exports = {
   ],
   theme: {
     extend: {
+      gap: {
+        "4.5": "1.125rem",
+        "15": "3.75rem"
+      },
 			screens: {
 				"2xs": "360px",
 				"xs": "460px",
