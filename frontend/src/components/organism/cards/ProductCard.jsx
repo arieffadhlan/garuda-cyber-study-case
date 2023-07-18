@@ -2,7 +2,7 @@ import Image from "next/image";
 
 const ProductCard = () => {
   return (
-    <div className="group flex flex-col gap-3 w-full border border-[$757575] rounded-lg shadow-sm">
+    <div className="flex flex-col gap-3 w-full border border-[$757575] rounded-lg shadow-sm">
       {/* Product Image */}
       <div className="relative w-full h-[180px]">
         <Image 
