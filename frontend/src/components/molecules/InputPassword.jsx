@@ -43,7 +43,7 @@ const InputPassword = ({
           {showPassword ? <EyeIcon className="w-4 h-4" /> : <EyeSlashIcon className="w-4 h-4" />}
         </button>
       </div>
-      {errors[name]?.message && <Alert type="error" message={errors[name].message} />}
+      {errors[name]?.message && <span className="mt-1 text-sm text-red-700">{errors[name].message}</span>}
     </div>
   );
 }

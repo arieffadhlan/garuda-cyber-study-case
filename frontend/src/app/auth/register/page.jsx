@@ -19,14 +19,14 @@ import AuthFormContainer from "@/components/templates/AuthFormContainer";
 import Form from "@/components/molecules/Form";
 
 const validationSchema = yup.object().shape({
-  name: yup.string().required("Nama wajib diisi!"),
+  name: yup.string().required("Name is required."),
   email: yup.string()
-  .required("Email wajib diisi!")
-  .email("Email tidak valid!"),
-  phone_number: yup.string().required("Nomor telepon wajib diisi!"),
+  .required("Email is required.")
+  .email("Invalid email."),
+  phone_number: yup.string().required("Phone number is required."),
   password: yup.string()
-    .required("Password wajib diisi!")
-    .min(8, "Password min 8 karakter!")
+    .required("Password is required.")
+    .min(8, "Password contains at least 8 characters.")
 });
 
 const Register = () => {  
@@ -56,7 +56,7 @@ const Register = () => {
   return (
     <AuthFormContainer>
       <h1 className="font-bold text-2xl text-black">
-        Daftar
+        Sign Up
       </h1>
       <div className="flex flex-col gap-10">
         <Form 
@@ -65,15 +65,15 @@ const Register = () => {
           className="flex flex-col gap-4"
         >
           <div className="flex flex-col gap-1">
-            <Label id="name">Nama</Label>
-            <Input type="text" name="name" placeholder="Nama lengkap" autoFocus />
+            <Label id="name">Name</Label>
+            <Input type="text" name="name" placeholder="Fullname" autoFocus />
           </div>
           <div className="flex flex-col gap-1">
             <Label id="email">Email</Label>
-            <Input type="email" name="email" placeholder="contoh@gmail.com" />
+            <Input type="email" name="email" placeholder="example@gmail.com" />
           </div>
           <div className="flex flex-col gap-1">
-            <Label id="phone_number">Nomor Telepon</Label>
+            <Label id="phone_number">Phone Number</Label>
             <Input type="number" name="phone_number" placeholder="08123456789" />
           </div>
           <div className="flex flex-col gap-1">
@@ -85,13 +85,13 @@ const Register = () => {
             className="w-full mt-2"
             loading={loading}
           >
-            Daftar
+            Continue
           </Button>
         </Form>
         <span className="flex justify-center items-center text-sm text-black">
-          Sudah punya akun?&nbsp;
+          Already have an account?&nbsp;
           <Link href="/auth/login" className="font-bold text-primary-4">
-            Masuk di sini
+            Sign In
           </Link>
         </span>
       </div>

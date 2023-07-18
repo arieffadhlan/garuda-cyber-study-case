@@ -19,8 +19,8 @@ import InputPassword from "@/components/molecules/InputPassword";
 import AuthFormContainer from "@/components/templates/AuthFormContainer";
 
 const validationSchema = yup.object().shape({
-  email: yup.string().required("Email wajib diisi!"),
-  password: yup.string().required("Password wajib diisi!")
+  email: yup.string().required("Email is required."),
+  password: yup.string().required("Password is required.")
 });
 
 const Login = () => {  
@@ -50,7 +50,7 @@ const Login = () => {
   return (
     <AuthFormContainer>
       <h1 className="font-bold text-2xl leading-6 text-black">
-        Masuk
+        Sign In
       </h1>
       <div className="flex flex-col gap-10">
         <Form 
@@ -66,7 +66,7 @@ const Login = () => {
             <div className="flex justify-between items-center">
               <Label id="password">Password</Label>
               <Link href="/auth/forgot-password" className="font-medium text-xs text-primary-4">
-                Lupa Password
+                Forgot Password
               </Link>
             </div>
             <InputPassword name="password" placeholder="Password" />
@@ -76,13 +76,13 @@ const Login = () => {
             className="w-full mt-2"
             loading={loading}
           >
-            Masuk
+            Continue
           </Button>
         </Form>
         <span className="flex justify-center items-center text-sm text-black">
-          Belum punya akun?&nbsp;
+          No account?&nbsp;
           <Link href="/auth/register" className="font-bold text-primary-4">
-            Daftar di sini
+            Create One
           </Link>
         </span>
       </div>

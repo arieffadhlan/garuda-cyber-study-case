@@ -47,7 +47,7 @@ const Input = ({
         />
       )}
       {formErrors && formErrors[name]?.message && (
-        <Alert type="error" message={formErrors[name].message} />
+        <span className="mt-1 text-sm text-red-700">{formErrors[name].message}</span>
       )}
     </div>
   );

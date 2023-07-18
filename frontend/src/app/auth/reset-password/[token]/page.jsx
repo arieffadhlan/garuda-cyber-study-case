@@ -18,11 +18,8 @@ import Form from "@/components/molecules/Form";
 
 const validationSchema = yup.object().shape({
   password: yup.string()
-    .required("Password wajib diisi!")
-    .min(8, "Password min 8 karakter!"),
-  confirmationPassword: yup.string()
-    .required("Konfirmasi password wajib diisi!")
-    .min(8, "Konfirmasi password min 8 karakter!")
+    .required("New password is required.")
+    .min(8, "New password contains at least 8 characters.")
 });
 
 const ResetPassword = ({ params }) => {  
@@ -62,19 +59,15 @@ const ResetPassword = ({ params }) => {
         className="flex flex-col gap-4"
       >
         <div className="flex flex-col gap-1">
-          <Label id="password">Password Baru</Label>
+          <Label id="password">New Password</Label>
           <InputPassword name="password" placeholder="Password baru" autoFocus />
-        </div>
-        <div className="flex flex-col gap-1">
-          <Label id="confirmationPassword">Ulangi Password Baru</Label>
-          <InputPassword name="confirmationPassword" placeholder="Ulangi password baru" />
         </div>
         <Button 
           type="submit" 
           className="w-full mt-2"
           loading={loading}
         >
-          Lanjut
+          Continue
         </Button>
       </Form>
 

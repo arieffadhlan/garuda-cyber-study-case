@@ -18,8 +18,8 @@ import Form from "@/components/molecules/Form";
 
 const validationSchema = yup.object().shape({
   email: yup.string()
-    .required("Email wajib diisi!")
-    .email("Email tidak valid!")
+    .required("Email is required.")
+    .email("Invalid email.")
 });
 
 const ForgotPassword = () => {  
@@ -49,7 +49,7 @@ const ForgotPassword = () => {
   return (
     <AuthFormContainer>
       <h1 className="font-bold text-2xl text-black">
-        Lupa Password
+        Forgot Password
       </h1>
       <Form 
         validationSchema={validationSchema} 
@@ -65,7 +65,7 @@ const ForgotPassword = () => {
           className="w-full mt-2"
           loading={loading}
         >
-          Kirim
+          Continue
         </Button>
       </Form>
 
