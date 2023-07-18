@@ -21,7 +21,7 @@ const addTransaction = async (req) => {
   try {
     const { cart, ammount } = req.body;
     const { id } = req.user;
-    const transactionCode = generateCode(8, dayjs(new Date()).format("DDMMYYYY"));
+    const transactionCode = generateCode(8, dayjs(new Date()).format("DDMMYY"));
 
     // Save transaction
     const transaction = await transactionRepository.addTransaction({
@@ -32,7 +32,7 @@ const addTransaction = async (req) => {
 
     await Promise.all(cart.map(async (item) => {
       // Reduce product stock
-      const product = productRepository.getProduct(item.productId);
+      const product = await productRepository.getProduct(item.productId);
       await productRepository.updateProduct(product.id, {
         stock: product.stock -= item.quantity
       });
@@ -59,7 +59,7 @@ const addTransaction = async (req) => {
       });
     }));
     
-    return transaction
+    return transaction;
   } catch (error) {
     if (error instanceof ApplicationError) {
       throw new ApplicationError(error.statusCode, error.message);

@@ -17,7 +17,7 @@ module.exports = {
         }
       },
       voucher_id: {
-        allowNull: false,
+        allowNull: true,
         type: Sequelize.UUID,
         references: {
           model: "Vouchers",
