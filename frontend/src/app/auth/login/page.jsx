@@ -60,16 +60,16 @@ const Login = () => {
         >
           <div className="flex flex-col gap-1">
             <Label id="email">Email</Label>
-            <Input type="email" name="email" placeholder="contoh@gmail.com" autoFocus />
+            <Input type="email" name="email" placeholder="Your email" autoFocus />
           </div>
           <div className="flex flex-col gap-1">
             <div className="flex justify-between items-center">
               <Label id="password">Password</Label>
-              <Link href="/auth/forgot-password" className="font-medium text-xs text-primary-4">
+              <Link href="/auth/forgot-password" className="font-medium text-xs text-emerald-800">
                 Forgot Password
               </Link>
             </div>
-            <InputPassword name="password" placeholder="Password" />
+            <InputPassword name="password" placeholder="Your password" />
           </div>
           <Button 
             type="submit" 
@@ -81,7 +81,7 @@ const Login = () => {
         </Form>
         <span className="flex justify-center items-center text-sm text-black">
           No account?&nbsp;
-          <Link href="/auth/register" className="font-bold text-primary-4">
+          <Link href="/auth/register" className="font-bold text-emerald-800">
             Create One
           </Link>
         </span>

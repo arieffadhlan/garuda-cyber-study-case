@@ -66,7 +66,7 @@ const Register = () => {
         >
           <div className="flex flex-col gap-1">
             <Label id="name">Name</Label>
-            <Input type="text" name="name" placeholder="Fullname" autoFocus />
+            <Input type="text" name="name" placeholder="Name" autoFocus />
           </div>
           <div className="flex flex-col gap-1">
             <Label id="email">Email</Label>
@@ -75,6 +75,10 @@ const Register = () => {
           <div className="flex flex-col gap-1">
             <Label id="phone_number">Phone Number</Label>
             <Input type="number" name="phone_number" placeholder="08123456789" />
+          </div>
+          <div className="flex flex-col gap-1">
+            <Label id="address">Address</Label>
+            <Input type="text" name="address" placeholder="Your address" />
           </div>
           <div className="flex flex-col gap-1">
             <Label id="password">Password</Label>
@@ -90,7 +94,7 @@ const Register = () => {
         </Form>
         <span className="flex justify-center items-center text-sm text-black">
           Already have an account?&nbsp;
-          <Link href="/auth/login" className="font-bold text-primary-4">
+          <Link href="/auth/login" className="font-bold text-emerald-800">
             Sign In
           </Link>
         </span>
