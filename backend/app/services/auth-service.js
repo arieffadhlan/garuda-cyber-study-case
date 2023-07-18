@@ -24,7 +24,7 @@ const generateUUIDToken = () => {
 
 const register = async (req) => {
   try {
-    const { name, username, email, phone_number, address, password } = req.body;
+    const { name, email, phone_number, address, password } = req.body;
     if (checkRequiredData(req.body)) {
       throw new ApplicationError(422, "Semua data wajib diisi.");
     }
@@ -37,7 +37,6 @@ const register = async (req) => {
     const encryptedPassword = encryptPassword(password);
     const user = await userRepository.createUser({
       name,
-      username,
       email,
       phone_number,
       address,

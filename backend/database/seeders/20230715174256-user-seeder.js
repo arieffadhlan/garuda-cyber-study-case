@@ -8,7 +8,6 @@ module.exports = {
       {
         id: uuidv4(),
         name: "Admin",
-        username: "admin",
         email: "admin@gmail.com",
         phone_number: "08123456789",
         address: "Jalan Medan, Kabupaten Medan Tuntungan, Kecamatan Tanjung Selamat, Kota Medan, Sumatera Utara",
@@ -22,7 +21,6 @@ module.exports = {
       {
         id: uuidv4(),
         name: "User",
-        username: "user",
         email: "user@gmail.com",
         phone_number: "08987654321",
         address: "Jalan Medan, Kabupaten Medan Tuntungan, Kecamatan Tanjung Selamat, Kota Medan, Sumatera Utara",

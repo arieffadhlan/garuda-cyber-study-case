@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { ShoppingBagIcon } from "@heroicons/react/24/outline"
 import { openOffcanvas } from "@/redux/features/offcanvas/offcanvasSlice";
 import Button from "../atoms/Button";
+import ButtonLink from "../atoms/ButtonLink";
 
 const Navbar = () => {
 	const dispatch = useDispatch();
@@ -22,9 +23,9 @@ const Navbar = () => {
 					</div>
 					<div className="flex items-center gap-8">
 						<ShoppingBagIcon onClick={openCart} className="cursor-pointer w-8 h-8" />
-            <Button>
+            <ButtonLink href="/auth/login">
               Sign In
-            </Button>
+            </ButtonLink>
 					</div>
 				</div>
 			</div>
