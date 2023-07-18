@@ -1,7 +1,9 @@
-import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import { persistReducer, persistStore } from 'redux-persist';
-import createWebStorage from 'redux-persist/lib/storage/createWebStorage';
-import thunk from 'redux-thunk';
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import { persistReducer, persistStore } from "redux-persist";
+import createWebStorage from "redux-persist/lib/storage/createWebStorage";
+import thunk from "redux-thunk";
+
+import offcanvasReducer from "./features/offcanvas/offcanvasSlice";
 
 const createNoopStorage = () => {
   return {
@@ -23,7 +25,9 @@ const persistConfig = {
   storage
 }
 
-const rootReducer = combineReducers({});
+const rootReducer = combineReducers({
+  offcanvas: offcanvasReducer,
+});
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
