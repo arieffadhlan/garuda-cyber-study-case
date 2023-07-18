@@ -1,12 +1,12 @@
 import Image from "next/image";
 
-const ProductCard = () => {
+const ProductCard = ({ product }) => {
   return (
     <div className="flex flex-col gap-3 w-full border border-[$757575] rounded-lg shadow-sm">
       {/* Product Image */}
       <div className="relative w-full h-[180px]">
         <Image 
-          src="https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg" 
+          src={product.image} 
           fill={true}
           alt="Image" 
           className="object-cover" 
@@ -16,14 +16,14 @@ const ProductCard = () => {
       <div className="flex flex-col gap-3 px-3 pb-3">
         <div className="flex flex-col gap-0.5">
           <span className="font-medium text-sm">
-            Black T-Shirt
+            {product.name}
           </span>
-          <span className="font-medium text-sm text-[#595959]">
-            Stock: 20
+          <span className="font-medium text-xs text-[#595959]">
+            Stock: {product.stock}
           </span>
         </div>
-        <strong className="text-base">
-          Rp 120.000
+        <strong className="text-sm">
+          Rp {product.price.toLocaleString("id-ID")}
         </strong>
       </div>
     </div>
