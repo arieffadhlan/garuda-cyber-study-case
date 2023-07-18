@@ -1,4 +1,7 @@
+"use client";
+
 import { Inter } from "next/font/google"
+import Provider from "@/redux/provider";
 import "./globals.css";
 
 const inter = Inter({ 
@@ -17,7 +20,11 @@ const RootLayout = ({ children }) => {
         <meta name="keyword" content="Garuda Cyber" />
         <title>Garuda Cyber</title>
       </head>
-      <body>{children}</body>
+      <body>
+        <Provider>
+          {children}
+        </Provider>
+      </body>
     </html>
   );
 }
