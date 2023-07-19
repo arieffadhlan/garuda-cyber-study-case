@@ -1,11 +1,21 @@
 "use client";
 
 import { useSelector } from "react-redux";
+import { useRouter } from "next/navigation";
 import Button from "../atoms/Button";
 import Offcanvas from "../molecules/Offcanvas";
 
 const CartList = () => {
+  const router = useRouter();
   const { carts } = useSelector((state) => state.cart);
+
+  const totalAmmount = carts.reduce((nextValue, current) => {
+    return nextValue + (current.quantity * current.product.price)
+  }, 0);
+
+  const checkoutCart = () => {
+    router.push("/checkout");
+  }
   
   return (
     <Offcanvas title="Cart">
@@ -46,20 +56,14 @@ const CartList = () => {
             <div className="flex flex-col gap-0.5">
               <div className="flex justify-between text-base">
                 <span className="font-medium">Subtotal</span>
-                <strong className="font-bold">Rp 250.000</strong>
+                <strong className="font-bold">Rp {totalAmmount.toLocaleString("id-ID")}</strong>
               </div>
               <p className="mb-0 text-sm text-[#595959]">Shipping and taxes calculated at checkout.</p>
             </div>
             <div className="flex flex-col justify-center items-center gap-6">
-              <Button className="w-full px-6 py-3">
+              <Button onClick={checkoutCart} className="w-full px-6 py-3">
                 Checkout
               </Button>
-              <div className="flex justify-center text-center text-sm">
-                <span className="text-[#595959]">or</span>&nbsp;
-                <button type="button" className="font-medium text-indigo-600 hover:text-indigo-500">
-                  Continue Shopping
-                </button>
-              </div>
             </div>
           </div>
         </>
