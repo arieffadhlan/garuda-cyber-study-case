@@ -3,16 +3,17 @@
 import { useSelector } from "react-redux";
 
 const CartSummaryCard = () => {
-  const { carts } = useSelector((state) => state.cart);
+  const { carts, voucher } = useSelector((state) => state.cart);
 
   const tax = carts.reduce((nextValue, current) => {
     return nextValue + ((current.quantity * current.product.price) * (10/100))
   }, 0);
 
   const totalAmmount = tax + carts.reduce((nextValue, current) => {
-    return nextValue + (current.quantity * current.product.price)
+    return voucher 
+      ? nextValue + (current.quantity * current.product.price) - 10000
+      : nextValue + (current.quantity * current.product.price)
   }, 0);
-
 
   return (
     <div className="flex flex-[50%] flex-col h-fit bg-neutral-1 border rounded-lg shadow-sm">
@@ -34,6 +35,14 @@ const CartSummaryCard = () => {
         ))}
       </div>
       <div className="flex flex-col gap-1 px-4 py-3 border-t">
+        {voucher && (
+          <div className="flex justify-between items-center text-sm">
+            <span className="font-semibold">Voucher</span>
+            <strong className="font-semibold text-emerald-700">
+              - Rp 10.000
+            </strong>
+          </div>
+        )}
         <div className="flex justify-between items-center text-sm">
           <span className="font-semibold">Tax</span>
           <strong className="font-semibold text-emerald-700">

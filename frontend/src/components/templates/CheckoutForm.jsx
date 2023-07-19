@@ -4,10 +4,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
 import { ToastContainer } from "react-toastify";
 
+import { checkout } from "@/redux/features/transaction/transactionAction";
+import Button from "../atoms/Button";
 import CheckoutUserForm from "../organism/forms/CheckoutUserForm";
 import CheckoutPaymentForm from "../organism/forms/CheckoutPaymentForm";
-import Button from "../atoms/Button";
-import { checkout } from "@/redux/features/transaction/transactionAction";
+import CheckoutVoucherForm from "../organism/forms/CheckoutVoucherForm";
 
 const CheckoutForm = () => {
   const dispatch = useDispatch();
@@ -50,6 +51,7 @@ const CheckoutForm = () => {
   return (
     <form onSubmit={handleFormSubmit} className="flex flex-[50%] flex-col gap-9">
       <CheckoutUserForm />
+      <CheckoutVoucherForm />
       <CheckoutPaymentForm />
       <Button type="submit" className="px-5 py-3.5">
         Continue

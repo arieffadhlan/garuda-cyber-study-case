@@ -1,22 +1,15 @@
 "use client";
 
-import { useEffect } from "react";
 import Image from "next/image";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import dayjs from "dayjs";
-import { getTransactions } from "@/redux/features/transaction/transactionAction";
 
 import ButtonLink from "../atoms/ButtonLink";
 import orderHistoryEmpty from "@/assets/images/order-history-empty.svg";
 
 const OrderHistoryList = () => {
-  const dispatch = useDispatch();
   const { transactions } = useSelector((state) => state.transaction);
   const { user } = useSelector((state) => state.auth);
-
-  useEffect(() => {
-    dispatch(getTransactions());
-  }, []);
 
   const userTransactions = transactions.filter((transaction) => {
     return transaction.user_id === user.data.id
