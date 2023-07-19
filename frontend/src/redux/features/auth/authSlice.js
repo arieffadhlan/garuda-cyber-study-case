@@ -1,12 +1,7 @@
 const { createSlice } = require("@reduxjs/toolkit");
 import { 
-  forgotPassword, 
   loginUser, 
   registerUser, 
-  resendOTP, 
-  resetPassword, 
-  updateProfile, 
-  verifyOTP 
 } from "./authAction";
 
 const initialState = {
@@ -35,20 +30,6 @@ const authSlice = createSlice({
     }
   },
   extraReducers: (builder) => {
-    // Update Profile
-    builder.addCase(updateProfile.pending, (state) => {
-      state.loading = true;
-    });
-    builder.addCase(updateProfile.fulfilled, (state, action) => {
-      state.user = action.payload;
-      state.loading = false;
-      state.success = true;
-      state.error = null;
-    });
-    builder.addCase(updateProfile.rejected, (state, action) => {
-      state.loading = false;
-      state.error = action.payload;
-    });
     // Register
     builder.addCase(registerUser.pending, (state) => {
       state.loading = true;
@@ -60,32 +41,6 @@ const authSlice = createSlice({
       state.error = null;
     });
     builder.addCase(registerUser.rejected, (state, action) => {
-      state.loading = false;
-      state.error = action.payload;
-    });
-    // Verify OTP
-    builder.addCase(verifyOTP.pending, (state) => {
-      state.loading = true;
-    });
-    builder.addCase(verifyOTP.fulfilled, (state, action) => {
-      state.user = action.payload;
-      state.loading = false;
-      state.success = true;
-      state.error = null;
-    });
-    builder.addCase(verifyOTP.rejected, (state, action) => {
-      state.loading = false;
-      state.error = action.payload;
-    });
-    // Resend OTP
-    builder.addCase(resendOTP.pending, (state) => {
-      state.loading = true;
-    });
-    builder.addCase(resendOTP.fulfilled, (state, action) => {
-      state.loading = false;
-      state.error = null;
-    });
-    builder.addCase(resendOTP.rejected, (state, action) => {
       state.loading = false;
       state.error = action.payload;
     });
@@ -101,34 +56,6 @@ const authSlice = createSlice({
       state.error = null;
     });
     builder.addCase(loginUser.rejected, (state, action) => {
-      state.loading = false;
-      state.error = action.payload;
-    });
-    // Forgot Password
-    builder.addCase(forgotPassword.pending, (state) => {
-      state.loading = true;
-    });
-    builder.addCase(forgotPassword.fulfilled, (state, action) => {
-      state.user = action.payload;
-      state.loading = false;
-      state.success = true;
-      state.error = null;
-    });
-    builder.addCase(forgotPassword.rejected, (state, action) => {
-      state.loading = false;
-      state.error = action.payload;
-    });
-    // Reset Password
-    builder.addCase(resetPassword.pending, (state) => {
-      state.loading = true;
-    });
-    builder.addCase(resetPassword.fulfilled, (state, action) => {
-      state.user = action.payload;
-      state.loading = false;
-      state.success = true;
-      state.error = null;
-    });
-    builder.addCase(resetPassword.rejected, (state, action) => {
       state.loading = false;
       state.error = action.payload;
     });
