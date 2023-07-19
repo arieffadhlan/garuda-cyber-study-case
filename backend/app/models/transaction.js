@@ -22,7 +22,6 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     code: DataTypes.CHAR(14),
-    status: DataTypes.STRING,
     ammount: DataTypes.INTEGER,
     payment_method: DataTypes.STRING
   }, {

@@ -20,17 +20,12 @@ module.exports = {
         allowNull: false,
         type: Sequelize.CHAR(14)
       },
-      status: {
-        allowNull: false,
-        defaultValue: "Belum Dibayar",
-        type: Sequelize.STRING
-      },
       ammount: {
         allowNull: false,
         type: Sequelize.INTEGER
       },
       payment_method: {
-        allowNull: true,
+        allowNull: false,
         type: Sequelize.STRING
       },
       createdAt: {

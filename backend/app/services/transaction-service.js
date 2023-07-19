@@ -19,7 +19,7 @@ const generateCode = (length, prepend = "") => {
 
 const addTransaction = async (req) => {
   try {
-    const { cart, ammount } = req.body;
+    const { cart, ammount, paymentMethod } = req.body;
     const { id } = req.user;
     const transactionCode = generateCode(8, dayjs(new Date()).format("DDMMYY"));
 
@@ -27,7 +27,8 @@ const addTransaction = async (req) => {
     const transaction = await transactionRepository.addTransaction({
       user_id: id,
       code: transactionCode,
-      ammount
+      ammount,
+      payment_method: paymentMethod
     });
 
     await Promise.all(cart.map(async (item) => {

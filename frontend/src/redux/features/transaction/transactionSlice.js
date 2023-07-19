@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { checkout } from "./transactionAction";
 
 const initialState = {
   transactions: [],
@@ -36,6 +37,21 @@ const transactionSlice = createSlice({
     setSelectedPaymentMethod: (state, action) => {
       state.selectedPaymentMethod = action.payload;
     },
+  },
+  extraReducers: (builder) => {
+    // Checkout
+    builder.addCase(checkout.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(checkout.fulfilled, (state, action) => {
+      state.selectedTransaction = action.payload.data;
+      state.loading = false;
+      state.success = true;
+    });
+    builder.addCase(checkout.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    });
   }
 });
 
