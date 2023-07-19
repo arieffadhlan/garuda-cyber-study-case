@@ -67,7 +67,9 @@ const CartList = () => {
                 <span className="font-medium">Subtotal</span>
                 <strong className="font-bold">Rp {totalAmmount.toLocaleString("id-ID")}</strong>
               </div>
-              <p className="mb-0 text-sm text-[#595959]">Shipping and taxes calculated at checkout.</p>
+              <p className="mb-0 text-sm text-[#595959]">
+                Shipping and taxes calculated at checkout.
+              </p>
             </div>
             <div className="flex flex-col justify-center items-center gap-6">
               <Button onClick={checkoutCart} className="w-full px-6 py-3">
