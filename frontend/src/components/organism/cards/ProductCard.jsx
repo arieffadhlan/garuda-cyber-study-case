@@ -54,6 +54,7 @@ const ProductCard = ({ product }) => {
       <div className="relative w-full h-[180px]">
         <Image 
           src={product.image} 
+          priority={true}
           fill={true}
           alt="Image" 
           className="object-cover" 

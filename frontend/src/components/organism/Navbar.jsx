@@ -7,6 +7,7 @@ import { ShoppingBagIcon, QueueListIcon } from "@heroicons/react/24/outline"
 
 import { openOffcanvas } from "@/redux/features/offcanvas/offcanvasSlice";
 import ButtonLink from "../atoms/ButtonLink";
+import Image from "next/image";
 
 const Navbar = () => {
 	const dispatch = useDispatch();
@@ -23,7 +24,16 @@ const Navbar = () => {
 			<div className="flex flex-col gap-5 max-w-8xl px-5 py-4 mx-auto sm:px-16">
 				<div className="flex flex-wrap items-center justify-between">
 					<div className="flex items-center">
-						<Link href="/" className="font-semibold text-base">GarudaCyber</Link>
+						<Link href="/" className="font-semibold text-base">
+							<Image 
+								src="https://garudacyber.co.id/images/internet/logo.png"
+								alt="Logo" 
+								priority={true}
+								width={48}
+								height={24}
+								className="w-auto h-auto"
+							/>
+						</Link>
 					</div>
 					<div className="flex items-center gap-8">
 						{token ? (

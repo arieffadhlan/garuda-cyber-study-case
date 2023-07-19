@@ -46,7 +46,7 @@ const Offcanvas = ({ title, children }) => {
                   <div className="overflow-y-auto h-full mt-14 pb-14 bg-white shadow-xl">
                     <div className="px-5 pt-5">
                       <div className="flex justify-between items-start">
-                        <Dialog.Title className="font-medium text-lg text-gray-900">
+                        <Dialog.Title className="font-semibold text-lg text-gray-900">
                           {title}
                         </Dialog.Title>
                         <div className="flex items-center h-7 ml-3">
