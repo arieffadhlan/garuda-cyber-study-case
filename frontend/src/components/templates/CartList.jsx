@@ -1,11 +1,14 @@
 "use client";
 
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
+import { setCart } from "@/redux/features/cart/cartSlice";
+
 import Button from "../atoms/Button";
 import Offcanvas from "../molecules/Offcanvas";
 
 const CartList = () => {
+  const dispatch = useDispatch();
   const router = useRouter();
   const { carts } = useSelector((state) => state.cart);
 
@@ -13,6 +16,12 @@ const CartList = () => {
     return nextValue + (current.quantity * current.product.price)
   }, 0);
 
+  const removeItem = (productId) => {
+    dispatch(setCart(
+      carts.filter((item) => item.product.id !== productId)
+    ));
+  }
+  
   const checkoutCart = () => {
     router.push("/checkout");
   }
@@ -25,8 +34,8 @@ const CartList = () => {
           <div className="px-5 pb-5 mt-6">
             <div className="flow-root">
               <div className="-my-6 divide-y divide-gray-200">
-                {carts.map((item) => (
-                  <div key={item.product.id} className="flex py-6">
+                {carts.map((item, index) => (
+                  <div key={index} className="flex py-6">
                     <div className="overflow-hidden flex-shrink-0 w-24 h-24 rounded-md border border-gray-200">
                       <img
                         src={item.product.image}
@@ -41,7 +50,7 @@ const CartList = () => {
                       </div>
                       <div className="flex flex-1 justify-between items-end text-sm">
                         <p className="text-[#595959]">Quantity: {item.quantity}</p>
-                        <button type="button" className="font-medium text-red-600">
+                        <button type="button" onClick={() => removeItem(item.product.id)} className="font-medium text-red-600">
                           Remove
                         </button>
                       </div>
