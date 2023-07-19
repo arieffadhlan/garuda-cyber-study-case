@@ -6,6 +6,7 @@ import thunk from "redux-thunk";
 import authReducer from "./features/auth/authSlice";
 import cartReducer from "./features/cart/cartSlice";
 import offcanvasReducer from "./features/offcanvas/offcanvasSlice";
+import transactionReducer from "./features/transaction/transactionSlice";
 
 const createNoopStorage = () => {
   return {
@@ -30,7 +31,8 @@ const persistConfig = {
 const rootReducer = combineReducers({
   auth: authReducer,
   cart: cartReducer,
-  offcanvas: offcanvasReducer
+  offcanvas: offcanvasReducer,
+  transaction: transactionReducer
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

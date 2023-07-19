@@ -23,7 +23,7 @@ const CartSummaryCard = () => {
       </div>
       <div className="flex flex-col px-4 divide-y divide-gray-200">
         {carts.map((item) => (
-          <div className="flex justify-between gap-0.5 py-4 text-sm">
+          <div key={item.product.id} className="flex justify-between gap-0.5 py-4 text-sm">
             <span className="font-medium">
               {item.quantity} x {item.product.name}
             </span>
