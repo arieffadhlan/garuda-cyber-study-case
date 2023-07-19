@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
-import { ShoppingBagIcon, QueueListIcon } from "@heroicons/react/24/outline"
+import { QueueListIcon, ShoppingBagIcon, UserCircleIcon } from "@heroicons/react/24/outline"
 
 import { openOffcanvas } from "@/redux/features/offcanvas/offcanvasSlice";
 import ButtonLink from "../atoms/ButtonLink";
@@ -47,6 +47,9 @@ const Navbar = () => {
 										{carts.length}
 									</span>
 								</button>
+								<Link href="/account" className={pathname === "/account" ? "text-emerald-800" : ""}>
+									<UserCircleIcon className="w-6 h-6" />
+								</Link>
 							</>
 						) : (
 							<ButtonLink href="/auth/login">

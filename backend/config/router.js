@@ -14,6 +14,7 @@ router.post("/api/v1/reset-password/:token", controllers.authController.resetPas
 // User
 router.get("/api/v1/user", middlewares.authorize, controllers.userController.getUsers);
 router.get("/api/v1/user/:id", middlewares.authorize, controllers.userController.getUser);
+router.put("/api/v1/user/:id", middlewares.authorize, controllers.userController.updateUser);
 
 // Product
 router.get("/api/v1/product", controllers.productController.getProducts);

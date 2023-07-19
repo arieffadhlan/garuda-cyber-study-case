@@ -15,6 +15,7 @@ const inter = Inter({
 
 const RootLayout = ({ children }) => {
   const protectedRoutes = [
+    "/account",
     "/checkout",
     "/checkout/checkout-success",
     "/order-history"
