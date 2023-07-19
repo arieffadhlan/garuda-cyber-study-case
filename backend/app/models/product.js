@@ -4,7 +4,10 @@ const { v4: uuidv4 } = require("uuid");
 module.exports = (sequelize, DataTypes) => {
   class Product extends Model {
     static associate(models) {
-      // define association here
+      this.hasMany(models.Order, { 
+        foreignKey: "product_id",
+        as: "orders"
+      });
     }
   }
   Product.init({

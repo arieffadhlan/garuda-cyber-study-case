@@ -1,10 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { checkout } from "./transactionAction";
+import { checkout, getTransactions } from "./transactionAction";
 
 const initialState = {
   transactions: [],
-  transactionData: {},
-  selectedTransaction: {},
   selectedPaymentMethod: null,
   loading: false,
   success: false,
@@ -17,34 +15,37 @@ const transactionSlice = createSlice({
   reducers: {
     clearTransactionState: (state) => {
       state.transactions = [];
-      state.transactionData = {};
-      state.selectedTransaction = {};
       state.selectedPaymentMethod = null;
       state.loading = false;
       state.success = false;
       state.error = null;
     },    
-    clearTransactionMessage: (state) => {
-      state.transactionData = {};
-      state.success = false;
-    },    
     clearSelectedPaymentMethod: (state) => {
       state.selectedPaymentMethod = null;
-    },
-    setSelectedTransaction: (state, action) => {
-      state.selectedTransaction = action.payload;
     },
     setSelectedPaymentMethod: (state, action) => {
       state.selectedPaymentMethod = action.payload;
     },
   },
   extraReducers: (builder) => {
+    // Get transactions
+    builder.addCase(getTransactions.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(getTransactions.fulfilled, (state, action) => {
+      state.transactions = action.payload.data;
+      state.loading = false;
+      state.success = true;
+    });
+    builder.addCase(getTransactions.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    });
     // Checkout
     builder.addCase(checkout.pending, (state) => {
       state.loading = true;
     });
     builder.addCase(checkout.fulfilled, (state, action) => {
-      state.selectedTransaction = action.payload.data;
       state.loading = false;
       state.success = true;
     });
@@ -57,9 +58,7 @@ const transactionSlice = createSlice({
 
 export const { 
   clearTransactionState,
-  clearTransactionMessage,
   clearSelectedPaymentMethod,
-  setSelectedTransaction, 
   setSelectedPaymentMethod 
 } = transactionSlice.actions;
 

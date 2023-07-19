@@ -23,6 +23,7 @@ router.put("/api/v1/product/:id", middlewares.authorize, controllers.productCont
 router.delete("/api/v1/product/:id", middlewares.authorize, controllers.productController.deleteProduct);
 
 // Transaction
+router.get("/api/v1/transaction", middlewares.authorize, controllers.transactionController.getTransactions);
 router.post("/api/v1/transaction", middlewares.authorize, controllers.transactionController.addTransaction);
 
 module.exports = router;

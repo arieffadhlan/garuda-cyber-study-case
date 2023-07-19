@@ -16,6 +16,20 @@ const generateCode = (length, prepend = "") => {
   return code;
 }
 
+const getTransactions = async () => {
+  try {
+    const transactions = await transactionRepository.getTransactions();
+
+    return transactions;
+  } catch (error) {
+    if (error instanceof ApplicationError) {
+      throw new ApplicationError(error.statusCode, error.message);
+    } else {
+      throw new Error(error.message);
+    }
+  }
+}
+
 const addTransaction = async (req) => {
   try {
     const { cart, ammount, paymentMethod } = req.body;
@@ -66,5 +80,6 @@ const addTransaction = async (req) => {
 }
 
 module.exports = {
+  getTransactions,
   addTransaction
 }

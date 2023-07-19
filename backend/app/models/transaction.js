@@ -4,7 +4,18 @@ const { v4: uuidv4 } = require("uuid");
 module.exports = (sequelize, DataTypes) => {
   class Transaction extends Model {
     static associate(models) {
-      // define association here
+      this.hasMany(models.Order, { 
+        foreignKey: "transaction_id",
+        as: "orders"
+      });
+      this.belongsTo(models.User, { 
+        foreignKey: "user_id",
+        as: "user"
+      });
+      this.belongsTo(models.Voucher, { 
+        foreignKey: "voucher_id",
+        as: "voucher"
+      });
     }
   }
   Transaction.init({
