@@ -21,10 +21,10 @@ module.exports = (sequelize, DataTypes) => {
         key: "id"
       }
     },
-    cart_id: {
+    product_id: {
       type: DataTypes.UUID,
       references: {
-        model: "Cart",
+        model: "Product",
         key: "id"
       }
     }

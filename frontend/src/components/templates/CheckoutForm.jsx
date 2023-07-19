@@ -16,13 +16,13 @@ const CheckoutForm = () => {
   const { carts } = useSelector((state) => state.cart);
 	const { selectedPaymentMethod } = useSelector((state) => state.transaction);
 
-  const cartData = [carts.map((item) => {
+  const cartData = carts.map((item) => {
     return { 
       userId: user.data.id,
       productId: item.product.id,
       quantity: item.quantity
     }
-  })];
+  });
 
   const tax = carts.reduce((nextValue, current) => {
     return nextValue + ((current.quantity * current.product.price) * (10/100))
@@ -32,7 +32,9 @@ const CheckoutForm = () => {
     return nextValue + (current.quantity * current.product.price)
   }, 0);
   
-  const handleFormSubmit = () => {
+  const handleFormSubmit = (event) => {
+    event.preventDefault()
+    
     if (!selectedPaymentMethod) {
       alert("Please choose a payment method.")
     } else {

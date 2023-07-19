@@ -34,6 +34,7 @@ const addTransaction = async (req) => {
     await Promise.all(cart.map(async (item) => {
       // Reduce product stock
       const product = await productRepository.getProduct(item.productId);
+      console.log(product);
       await productRepository.updateProduct(product.id, {
         stock: product.stock -= item.quantity
       });
@@ -41,7 +42,7 @@ const addTransaction = async (req) => {
       // Add order
       const order = await orderRepository.addOrder({
         transaction_id: transaction.id,
-        cart_id: item.id
+        product_id: item.productId
       });
 
       // Add a voucher if the purchase is more than 2 million

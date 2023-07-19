@@ -16,11 +16,11 @@ module.exports = {
           key: "id"
         }
       },
-      cart_id: {
+      product_id: {
         allowNull: false,
-        type: Sequelize.INTEGER,
+        type: Sequelize.UUID,
         references: {
-          model: "Carts",
+          model: "Products",
           key: "id"
         }
       },
