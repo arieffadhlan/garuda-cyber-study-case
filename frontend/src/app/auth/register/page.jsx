@@ -42,7 +42,7 @@ const Register = () => {
     const redirectTimer = setTimeout(() => {
       if (success) {
         dispatch(clearState());
-        router.push("/auth/verify");
+        router.push("/auth/login");
       }
     }, 3000);
     

@@ -32,13 +32,14 @@ export const updateProfile = createAsyncThunk("updateProfile",
 );
 
 export const registerUser = createAsyncThunk("auth/register", 
-  async ({ name, email, phone_number, password }, { rejectWithValue }) => {
+  async ({ name, email, phone_number, password, address }, { rejectWithValue }) => {
     try {
       const response = await axios.post(`${url}/register`, {
         name,
         email,
         phone_number,
-        password
+        password,
+        address
       }, config);
 
       return response.data;

@@ -20,7 +20,7 @@ const Button = ({
       {...props}
     >
       {loading ? (
-        <ArrowPathIcon className="w-4 h-4 animate-spin" />
+        <ArrowPathIcon className="w-5 h-5 animate-spin" />
       ): children}
     </button>
   ) : (

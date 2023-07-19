@@ -41,6 +41,7 @@ const register = async (req) => {
       phone_number,
       address,
       password: encryptedPassword,
+      is_verified: true
     });
   
     return user; 
