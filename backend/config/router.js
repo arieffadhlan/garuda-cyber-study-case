@@ -22,11 +22,6 @@ router.post("/api/v1/product", middlewares.authorize, controllers.productControl
 router.put("/api/v1/product/:id", middlewares.authorize, controllers.productController.updateProduct);
 router.delete("/api/v1/product/:id", middlewares.authorize, controllers.productController.deleteProduct);
 
-// Cart
-router.get("/api/v1/cart", middlewares.authorize, controllers.cartController.getCartByUser);
-router.post("/api/v1/cart", middlewares.authorize, controllers.cartController.addToCart);
-router.delete("/api/v1/cart/:id", middlewares.authorize, controllers.cartController.removeFromCart);
-
 // Transaction
 router.post("/api/v1/transaction", middlewares.authorize, controllers.transactionController.addTransaction);
 

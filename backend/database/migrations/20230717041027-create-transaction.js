@@ -16,6 +16,14 @@ module.exports = {
           key: "id"
         }
       },
+      voucher_id: {
+        allowNull: true,
+        type: Sequelize.UUID,
+        references: {
+          model: "Vouchers",
+          key: "id"
+        }
+      },
       code: {
         allowNull: false,
         type: Sequelize.CHAR(14)

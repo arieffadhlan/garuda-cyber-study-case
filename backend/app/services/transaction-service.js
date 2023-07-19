@@ -1,5 +1,4 @@
 const dayjs = require("dayjs");
-const invoiceRepository = require("../repositories/invoice-repository");
 const orderRepository = require("../repositories/order-repository");
 const productRepository = require("../repositories/product-repository");
 const transactionRepository = require("../repositories/transaction-repository");
@@ -23,9 +22,19 @@ const addTransaction = async (req) => {
     const { id } = req.user;
     const transactionCode = generateCode(8, dayjs(new Date()).format("DDMMYY"));
 
+    // Add a voucher if the purchase is more than 2 million
+    let voucher = null;
+    if (ammount > 2000000) {
+      voucher = await voucherRepository.addVoucher({
+        code: generateCode(6),
+        expired_date: dayjs(new Date()).add(3, "day")
+      });
+    }
+    
     // Save transaction
     const transaction = await transactionRepository.addTransaction({
       user_id: id,
+      voucher_id: voucher ? voucher.id : null,
       code: transactionCode,
       ammount,
       payment_method: paymentMethod
@@ -34,7 +43,6 @@ const addTransaction = async (req) => {
     await Promise.all(cart.map(async (item) => {
       // Reduce product stock
       const product = await productRepository.getProduct(item.productId);
-      console.log(product);
       await productRepository.updateProduct(product.id, {
         stock: product.stock -= item.quantity
       });
@@ -42,22 +50,8 @@ const addTransaction = async (req) => {
       // Add order
       const order = await orderRepository.addOrder({
         transaction_id: transaction.id,
-        product_id: item.productId
-      });
-
-      // Add a voucher if the purchase is more than 2 million
-      let voucher = null;
-      if (ammount > 2000000) {
-        voucher = await voucherRepository.addVoucher({
-          code: generateCode(6),
-          expired_date: dayjs(new Date()).add(3, "day")
-        });
-      }
-
-      // Add invoice
-      await invoiceRepository.addInvoice({
-        order_id: order.id,
-        voucher_id: voucher ? voucher.id : null
+        product_id: item.productId,
+        quantity: item.quantity
       });
     }));
     

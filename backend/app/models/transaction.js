@@ -21,6 +21,13 @@ module.exports = (sequelize, DataTypes) => {
         key: "id"
       }
     },
+    voucher_id: {
+      type: DataTypes.UUID,
+      references: {
+        model: "Voucher",
+        key: "id"
+      }
+    },
     code: DataTypes.CHAR(14),
     ammount: DataTypes.INTEGER,
     payment_method: DataTypes.STRING

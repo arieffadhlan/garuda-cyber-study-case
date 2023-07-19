@@ -11,6 +11,10 @@ const ProductCard = ({ product }) => {
   const cartProduct = carts.find((item) => item.product.id === product.id);
   
   const addToCart = () => {
+    if (cartProduct.quantity >= product.stock) {
+      return;
+    }
+
     if (carts.find((item) => item.product.id === product.id)) {
       dispatch(setCart(
         carts.map(item => {
@@ -77,9 +81,15 @@ const ProductCard = ({ product }) => {
             <Button onClick={addToCart} className="w-full px-3 py-1.5">+</Button>
           </div>
         ) : (
-          <Button onClick={addToCart} className="px-3 py-1.5">
-            Add to Cart
-          </Button>
+          product.stock > 0 ? (
+            <Button onClick={addToCart} className="px-3 py-1.5">
+              Add to Cart
+            </Button>
+          ) : (
+            <Button className="px-3 py-1.5" disabled>
+              Out of Stock
+            </Button>
+          )
         )}
       </div>
     </div>

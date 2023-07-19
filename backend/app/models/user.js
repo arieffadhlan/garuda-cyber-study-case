@@ -4,10 +4,6 @@ const { v4: uuidv4 } = require("uuid");
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     static associate(models) {
-      this.hasMany(models.Cart, { 
-        foreignKey: "user_id",
-        as: "carts"
-      });
     }
   }
   User.init({
