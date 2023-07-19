@@ -27,7 +27,7 @@ const ProductCard = ({ product }) => {
   }
 
   const removeFromCart = () => {
-    if (carts.find((item) => item.product.id === product.id)) {
+    if (carts.find((item) => item.product.id === product.id)?.quantity !== 1) {
       dispatch(setCart(
         carts.map(item => {
           if (item.product.id === product.id) {
@@ -38,7 +38,9 @@ const ProductCard = ({ product }) => {
         })
       ));
     } else {
-      dispatch(setCart([...carts, { product, quantity: 1 }]));
+      dispatch(setCart(
+        carts.filter((item) => item.product.id !== product.id)
+      ));
     }
   }
   
@@ -66,7 +68,7 @@ const ProductCard = ({ product }) => {
         <strong className="text-sm">
           Rp {product.price.toLocaleString("id-ID")}
         </strong>
-        {cartProduct.quantity > 0 ? (
+        {carts.length > 0 && cartProduct?.quantity > 0 ? (
           <div className="grid grid-cols-3 place-items-center gap-2">
             <Button onClick={removeFromCart} className="w-full px-3 py-1.5 bg-red-800">-</Button>
             <span className="flex justify-center items-center w-full h-full px-3 border border-[#757575] rounded-lg text-sm">
