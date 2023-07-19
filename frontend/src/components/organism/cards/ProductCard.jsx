@@ -11,7 +11,7 @@ const ProductCard = ({ product }) => {
   const cartProduct = carts.find((item) => item.product.id === product.id);
   
   const addToCart = () => {
-    if (cartProduct.quantity >= product.stock) {
+    if (carts.length > 0 && cartProduct?.quantity >= product.stock) {
       return;
     }
 

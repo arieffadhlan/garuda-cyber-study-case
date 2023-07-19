@@ -43,7 +43,7 @@ const Offcanvas = ({ title, children }) => {
                 leaveTo="translate-x-full"
               >
                 <Dialog.Panel className="pointer-events-auto w-screen max-w-md">
-                  <div className="overflow-y-auto h-full mt-[72px] pb-[72px] bg-white shadow-xl">
+                  <div className="overflow-y-auto h-full mt-14 pb-14 bg-white shadow-xl">
                     <div className="px-5 pt-5">
                       <div className="flex justify-between items-start">
                         <Dialog.Title className="font-medium text-lg text-gray-900">
