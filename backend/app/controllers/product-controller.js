@@ -39,7 +39,7 @@ const addProduct = async (req, res) => {
 
     res.status(201).json({
       status: "Success",
-      message: "Data produk telah berhasil ditambahkan.",
+      message: "Product data has been successfully added.",
       data: product
     });
   } catch (error) {
@@ -56,7 +56,7 @@ const updateProduct = async (req, res) => {
 
     res.status(200).json({
       status: "Success",
-      message: "Data produk telah berhasil diperbarui.",
+      message: "Product data has been updated successfully.",
     });
   } catch (error) {
     res.status(error.statusCode || 400).json({
@@ -73,7 +73,7 @@ const deleteProduct = async (req, res) => {
 
     res.status(200).json({
       status: "Success",
-      message: "Data produk telah berhasil dihapus.",
+      message: "Product data has been successfully deleted.",
     });
   } catch (error) {
     res.status(error.statusCode || 400).json({

@@ -22,7 +22,7 @@ const addTransaction = async (req, res) => {
 
     res.status(200).json({
       status: "Success",
-      message: "Data transaksi telah berhasil disimpan.",
+      message: "Transaction data has been successfully saved.",
       data: transaction
     });
   } catch (error) {

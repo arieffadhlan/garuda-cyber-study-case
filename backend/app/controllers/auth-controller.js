@@ -6,24 +6,8 @@ const register = async (req, res) => {
 
     res.status(201).json({
       status: "Success",
-      message: "Tautan verifikasi telah dikirim.",
+      message: "Registration has been successful.",
       data: user
-    });
-  } catch (error) {
-    res.status(error.statusCode || 400).json({
-      status: "Error",
-      message: error.message
-    });
-  }
-}
-
-const verifyAccount = async (req, res) => {
-  try {
-    await authService.verifyAccount(req);
-    
-    res.status(200).json({
-      status: "Success",
-      message: "Registrasi telah berhasil."
     });
   } catch (error) {
     res.status(error.statusCode || 400).json({
@@ -39,7 +23,7 @@ const login = async (req, res) => {
     
     res.status(201).json({
       status: "Success",
-      message: "Login telah berhasil.",
+      message: "Login has been successful.",
       data: {
         id: user.id,
         name: user.name,
@@ -58,42 +42,7 @@ const login = async (req, res) => {
   }
 }
 
-const forgotPassword = async (req, res) => {
-  try {
-    await authService.forgotPassword(req);
-    
-    res.status(200).json({
-      status: "Success",
-      message: "Tautan reset password berhasil terkirim."
-    });
-  } catch (error) {
-    res.status(error.statusCode || 400).json({
-      status: "Error",
-      message: error.message
-    });
-  }
-}
-
-const resetPassword = async (req, res) => {
-  try {
-    await authService.resetPassword(req);
-    
-    res.status(200).json({
-      status: "Success",
-      message: "Reset password telah berhasil."
-    });
-  } catch (error) {
-    res.status(error.statusCode || 400).json({
-      status: "Error",
-      message: error.message
-    });
-  }
-}
-
 module.exports = {
   register,
-  verifyAccount,
-  login,
-  forgotPassword,
-  resetPassword
+  login
 }

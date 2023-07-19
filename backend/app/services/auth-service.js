@@ -26,12 +26,12 @@ const register = async (req) => {
   try {
     const { name, email, phone_number, address, password } = req.body;
     if (checkRequiredData(req.body)) {
-      throw new ApplicationError(422, "Semua data wajib diisi.");
+      throw new ApplicationError(422, "All data must be filled in.");
     }
     
     const isUserExist = await userRepository.getUserByEmail(email);
     if (isUserExist) {
-      throw new ApplicationError(422, "Email telah terdaftar.");
+      throw new ApplicationError(422, "Email has been registered.");
     }
   
     const encryptedPassword = encryptPassword(password);
@@ -53,48 +53,25 @@ const register = async (req) => {
   }
 }
 
-const verifyAccount = async (req) => {
-  try {
-    const { token } = req.params;
-    
-    const user = await userRepository.getUserByToken(token);
-    if (!user) {
-      throw new ApplicationError(401, "Terjadi kesalahan, silakan coba lagi.");
-    }
-  
-    const newToken = generateUUIDToken();
-    return await userRepository.updateUser(user.id, {
-      is_verified: true,
-      token: newToken
-    });
-  } catch (error) {
-    if (error instanceof ApplicationError) {
-      throw new ApplicationError(error.statusCode, error.message);
-    } else {
-      throw new Error(error.message);
-    }
-  }
-}
-
 const login = async (req) => {
   try {
     const { email, password } = req.body;
     if (!email || !password) {
-      throw new ApplicationError(422, "Email dan password wajib diisi.");
+      throw new ApplicationError(422, "Email and password are required.");
     }
   
     const user = await userRepository.getUserByEmail(email);
     if (!user) {
-      throw new ApplicationError(401, "Identitas tersebut tidak sesuai dengan data kami.");
+      throw new ApplicationError(401, "The identity does not match our data.");
     }
     
     if (!user.is_verified) {
-      throw new ApplicationError(401, "Identitas tersebut tidak sesuai dengan data kami.");
+      throw new ApplicationError(401, "The identity does not match our data.");
     }
   
     const isPasswordCorrect = checkPassword(password, user.password);
     if (!isPasswordCorrect) {
-      throw new ApplicationError(401, "Identitas tersebut tidak sesuai dengan data kami.");
+      throw new ApplicationError(401, "The identity does not match our data.");
     }
   
     const token = createToken({
@@ -118,58 +95,7 @@ const login = async (req) => {
   }
 }
 
-const forgotPassword = async (req) => {
-  try {
-    const { email } = req.body;
-    if (!email) {
-      throw new ApplicationError(422, "Email wajib diisi.");
-    }
-  
-    const user = await userRepository.getUserByEmail(email);
-    if (!user) {
-      throw new ApplicationError(404, "Alamat email tidak ditemukan.");
-    }
-  } catch (error) {
-    if (error instanceof ApplicationError) {
-      throw new ApplicationError(error.statusCode, error.message);
-    } else {
-      throw new Error(error.message);
-    }
-  }
-}
-
-const resetPassword = async (req) => {
-  try {
-    const { token } = req.params;
-    const { password } = req.body;
-    if (!password) {
-      throw new ApplicationError(422, "Password wajib diisi.");
-    }
-    
-    const user = await userRepository.getUserByToken(token);
-    if (!user) {
-      throw new ApplicationError(401, "Terjadi kesalahan, silakan coba lagi.");
-    }
-  
-    const newPassword = encryptPassword(password);
-    const newToken = generateUUIDToken();
-    return await userRepository.updateUser(user.id, {
-      password: newPassword,
-      token: newToken
-    });
-  } catch (error) {
-    if (error instanceof ApplicationError) {
-      throw new ApplicationError(error.statusCode, error.message);
-    } else {
-      throw new Error(error.message);
-    }
-  }
-}
-
 module.exports = {
   register,
-  verifyAccount,
-  login,
-  forgotPassword,
-  resetPassword
+  login
 }

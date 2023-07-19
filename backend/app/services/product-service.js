@@ -19,7 +19,7 @@ const getProduct = async (id) => {
   try {
     const product = await productRepository.getProduct(id);
     if (!product) {
-      throw new ApplicationError(404, "Produk tidak ditemukan.");
+      throw new ApplicationError(404, "Product not found.");
     } 
     
     return product;
@@ -35,7 +35,7 @@ const getProduct = async (id) => {
 const addProduct = async (req) => {
   try {
     if (checkRequiredData(req.body)) {
-      throw new ApplicationError(422, "Semua data wajib diisi.");
+      throw new ApplicationError(422, "All data must be filled in.");
     }
 
     const product = await productRepository.addProduct(req.body);
@@ -55,7 +55,7 @@ const updateProduct = async (req) => {
     const { id } = req.params;
 
     if (checkRequiredData(req.body)) {
-      throw new ApplicationError(422, "Semua data wajib diisi.");
+      throw new ApplicationError(422, "All data must be filled in.");
     }
 
     const product = await getProduct(id);

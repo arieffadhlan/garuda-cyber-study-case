@@ -62,7 +62,7 @@ const addTransaction = async (req) => {
       });
 
       // Add order
-      const order = await orderRepository.addOrder({
+      await orderRepository.addOrder({
         transaction_id: transaction.id,
         product_id: item.productId,
         quantity: item.quantity

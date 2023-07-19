@@ -6,7 +6,7 @@ const getUsers = async () => {
   try {
     const users = await userRepository.getUsers();
     if (!users) {
-      throw new ApplicationError(404, "Pengguna tidak ditemukan.");
+      throw new ApplicationError(404, "User not found.");
     } 
     
     return users;
@@ -23,7 +23,7 @@ const getUser = async (id) => {
   try {
     const user = await userRepository.getUser(id);
     if (!user) {
-      throw new ApplicationError(404, "Pengguna tidak ditemukan.");
+      throw new ApplicationError(404, "User not found.");
     } 
     
     return user;
@@ -42,7 +42,7 @@ const updateUser = async (req) => {
     const { name, phone_number, address } = req.body;
 
     if (checkRequiredData(req.body)) {
-      throw new ApplicationError(422, "Semua data wajib diisi.");
+      throw new ApplicationError(422, "All data must be filled in.");
     }
 
     const user = await getUser(id);
